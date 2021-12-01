@@ -10,61 +10,63 @@
   <meta name="description" content="Coding Bootcamp Testimonials Slider">
 
   <link rel="stylesheet" href="./styles.css">
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body>
-  <main class="container">
-    <div class="testimonials">
-      <ul class="testimonial__list">
-        <li class="testimonial__item">
-          <div class="testimonial__image">
-            <img src="./images/image-tanya.jpg" alt="tanja">
-          </div>
+  <div x-data="{
+    activeSlide: 0,
+    slides: [
+      {
+        image: 'images/image-tanya.jpg',
+        name: 'Tanya Sinclair',
+        position: 'UX Engineer',
+        quote: 'I’ve been interested in coding for a while but never taken the jump, until now. I couldn’t recommend this course enough. I’m now in the job of my dreams and so excited about the future.',
+      },
+      {
+        image: 'images/image-john.jpg',
+        name: 'John Tarkpor',
+        position: 'Junior Front-end Developer',
+        quote: 'If you want to lay the best foundation possible I’d recommend taking this course. The depth the instructors go into is incredible. I now feel so confident about starting up as a professional developer.',
+      },
+    ]
+  }">
+    <main class="container">
+      <div class="testimonials">
+        <ul class="testimonial__list">
+          <!-- Slides -->
+          <template x-for="(slide, index) in slides" :key="index">
+            <li x-show="activeSlide === index" class="testimonial__item">
+              <div class="testimonial__image">
+                <img src="images/image-tanya.jpg" :src="slide.image" alt="tanja">
+              </div>
+              
+              <div class="testimonial__body">
+                <blockquote class="testimonial__quote">
+                  <p>&ldquo; <span x-text="slide.quote"></span> &rdquo;</p>
+                </blockquote>
 
-          <div class="testimonial__body">
-            <blockquote class="testimonial__quote">
-              <p>&ldquo; I’ve been interested in coding for a while but never taken the jump, until now. I couldn’t recommend this course enough. I’m now in the job of my dreams and so excited about the future. &rdquo;</p>
-            </blockquote>
+                <p class="testimonial__author">
+                  <strong x-text="slide.name"></strong> <span x-text="slide.position"></span>
+                </p>
+              </div>
+            </li>
+          </template>
+        </ul>
 
-            <p class="testimonial__author">
-              <strong>Tanya Sinclair</strong> <span>UX Engineer</span>
-            </p>
-          </div>
-        </li>
-
-        <li class="testimonial__item">
-          <div class="testimonial__image">
-            <img src="./images/image-john.jpg" alt="john">
-          </div>
-
-          <div class="testimonial__body">
-            <blockquote class="testimonial__quote">
-              <p>&ldquo; If you want to lay the best foundation possible I’d recommend taking this course. The depth the instructors go into is incredible. I now feel so confident about starting up as a professional developer. &rdquo;</p>
-            </blockquote>
-
-            <p class="testimonial__author">
-              <strong>John Tarkpor</strong> <span>Junior Front-end Developer</span>
-            </p>
-          </div>
-        </li>
-      </ul>
-
-      <div class="testimonial__nav">
-        <button class="testimonial__prev">
-          <span class="sr-only">Previous</span>
-        </button>
-        
-        <button class="testimonial__next">
-          <span class="sr-only">Next</span>
-        </button>
+        <!-- Prev/Next Arrows -->
+        <div class="testimonial__nav">
+          <button @click="activeSlide = activeSlide === 0 ? slides.length - 1 : activeSlide - 1" class="testimonial__prev"><span class="sr-only">Previous</span></button>
+          <button @click="activeSlide = activeSlide === slides.length - 1 ? 0 : activeSlide + 1" class="testimonial__next"><span class="sr-only">Next</span></button>
+        </div>
       </div>
-    </div>
-  </main>
-  
-  <footer>
-    <div class="attribution">
-      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank" rel="noreferrer noopener">Frontend Mentor</a>. 
-      Coded by <a href="https://twitter.com/bwalkermills">Byron</a>.
-    </div>
-  </footer>
+    </main>
+    
+    <footer>
+      <div class="attribution">
+        Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank" rel="noreferrer noopener">Frontend Mentor</a>. 
+        Coded by <a href="https://twitter.com/bwalkermills">Byron</a>.
+      </div>
+    </footer>
+  </div>
 </body>
 </html>
