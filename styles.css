@@ -172,6 +172,21 @@ p {
     border: 0;
 }
 
+.fade-1 {
+    animation: .5s .25s fade backwards ease-out;
+}
+
+.fade-2 {
+    animation: .5s .5s fade backwards ease-out;
+}
+
+@keyframes fade {
+    from {
+        transform: translate3d(0, -1.5rem, 0);
+        opacity: 0;
+    }
+}
+
 .attribution {
     display: none;
     font-size: 11px;
